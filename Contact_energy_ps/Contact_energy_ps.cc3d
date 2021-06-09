@@ -1,0 +1,6 @@
+<Simulation version="4.2.2">
+   <XMLScript Type="XMLScript">Simulation/Contact_energy_ps.xml</XMLScript>
+   <PythonScript Type="PythonScript">Simulation/Contact_energy_ps.py</PythonScript>
+   <Resource Type="Python">Simulation/Contact_energy_psSteppables.py</Resource>
+   <ParameterScan Type="ParameterScan">Simulation/ParameterScanSpecs.json</ParameterScan>
+</Simulation>
