@@ -1,0 +1,58 @@
+<CompuCell3D Revision="20200724" Version="4.2.2">
+   
+   <Metadata>
+      
+      <!-- Basic properties simulation -->
+      <NumberOfProcessors>1</NumberOfProcessors>
+      <DebugOutputFrequency>10</DebugOutputFrequency>
+      <!-- <NonParallelModule Name="Potts"/> -->
+   </Metadata>
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+   <Dimensions x="140" y="140" z="1"/>
+   <Steps>10000</Steps>
+   <FluctuationAmplitude>
+       <FluctuationAmplitudeParameters CellType="Boundary" FluctuationAmplitude="0"/>
+       <FluctuationAmplitudeParameters CellType="Cancer" FluctuationAmplitude="10"/>
+   </FluctuationAmplitude>
+   <Temperature>10.0</Temperature>
+   <NeighborOrder>1</NeighborOrder>
+
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType Freeze="" TypeId="1" TypeName="Boundary"/>
+      <CellType TypeId="2" TypeName="Cancer"/>
+   </Plugin>
+   
+   <Plugin Name="Volume">
+      <VolumeEnergyParameters CellType="Boundary" LambdaVolume="2.0" TargetVolume="25"/>
+      <VolumeEnergyParameters CellType="Cancer" LambdaVolume="2.0" TargetVolume="25"/>
+   </Plugin>
+   
+   <Plugin Name="Surface">
+      <SurfaceEnergyParameters CellType="Boundary" LambdaSurface="2.0" TargetSurface="20"/>
+      <SurfaceEnergyParameters CellType="Cancer" LambdaSurface="2.0" TargetSurface="20"/>
+   </Plugin>
+   
+   <Plugin Name="CenterOfMass">
+      
+      <!-- Module tracking center of mass of each cell -->
+   </Plugin>
+   <Plugin Name="Contact">
+   <!-- Specification of adhesion energies -->
+   <Energy Type1="Medium" Type2="Medium">10.0</Energy>
+   <Energy Type1="Medium" Type2="Boundary">10.0</Energy>
+   <Energy Type1="Medium" Type2="Cancer">{{cm}}</Energy>
+   <Energy Type1="Boundary" Type2="Boundary">0</Energy>
+   <Energy Type1="Boundary" Type2="Cancer">100.0</Energy>
+   <Energy Type1="Cancer" Type2="Cancer">{{cc}}</Energy>
+   <NeighborOrder>1</NeighborOrder>
+</Plugin>
+
+</CompuCell3D>

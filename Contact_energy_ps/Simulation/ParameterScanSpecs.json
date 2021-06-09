@@ -1,0 +1,11 @@
+{
+    "version":"4.2.2",
+    "parameter_list":{
+        "cm":{            
+            "values":[2, 4, 6]
+        },
+        "cc":{
+            "values":[2, 4, 6, 8]
+        }    
+    }
+}
