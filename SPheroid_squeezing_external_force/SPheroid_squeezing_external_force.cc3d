@@ -1,0 +1,5 @@
+<Simulation version="4.2.2">
+   <XMLScript Type="XMLScript">Simulation/SPheroid_squeezing_external_force.xml</XMLScript>
+   <PythonScript Type="PythonScript">Simulation/SPheroid_squeezing_external_force.py</PythonScript>
+   <Resource Type="Python">Simulation/SPheroid_squeezing_external_forceSteppables.py</Resource>
+</Simulation>

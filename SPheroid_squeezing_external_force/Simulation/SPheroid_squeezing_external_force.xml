@@ -1,0 +1,82 @@
+<CompuCell3D Revision="20200724" Version="4.2.2">
+   
+   <Metadata>
+      
+      <!-- Basic properties simulation -->
+      <NumberOfProcessors>1</NumberOfProcessors>
+      <DebugOutputFrequency>10</DebugOutputFrequency>
+      <!-- <NonParallelModule Name="Potts"/> -->
+   </Metadata>
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="450" y="200" z="1"/>
+      <Steps>8000</Steps>
+      <Temperature>10.0</Temperature>
+      <NeighborOrder>1</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" TypeName="Periphery"/>
+      <CellType TypeId="2" TypeName="Core"/>
+      <CellType Freeze="" TypeId="3" TypeName="Chamber"/>
+   </Plugin>
+<!-- For spheroid size=30    -->
+   <Plugin Name="Volume">
+      <VolumeEnergyParameters CellType="Periphery" LambdaVolume="5.0" TargetVolume="25"/>
+      <VolumeEnergyParameters CellType="Core" LambdaVolume="05.0" TargetVolume="25"/>
+      <VolumeEnergyParameters CellType="Chamber" LambdaVolume="5.0" TargetVolume="25"/>
+   </Plugin>
+   
+   <Plugin Name="Surface">
+      <SurfaceEnergyParameters CellType="Periphery" LambdaSurface="5.0" TargetSurface="20"/>
+      <SurfaceEnergyParameters CellType="Core" LambdaSurface="05.0" TargetSurface="20"/>
+      <SurfaceEnergyParameters CellType="Chamber" LambdaSurface="5.0" TargetSurface="20"/>
+   </Plugin>
+<!-- For spheroid size=60    -->
+<!--    <Plugin Name="Volume"> -->
+<!--       <VolumeEnergyParameters CellType="Periphery" LambdaVolume="5.0" TargetVolume="25"/> -->
+<!--       <VolumeEnergyParameters CellType="Core" LambdaVolume="0.50" TargetVolume="400"/> -->
+<!--       <VolumeEnergyParameters CellType="Chamber" LambdaVolume="5.0" TargetVolume="25"/> -->
+<!--    </Plugin> -->
+   
+<!--    <Plugin Name="Surface"> -->
+<!--       <SurfaceEnergyParameters CellType="Periphery" LambdaSurface="5.0" TargetSurface="20"/> -->
+<!--       <SurfaceEnergyParameters CellType="Core" LambdaSurface="0.50" TargetSurface="80"/> -->
+<!--       <SurfaceEnergyParameters CellType="Chamber" LambdaSurface="5.0" TargetSurface="20"/> -->
+<!--    </Plugin> / -->
+
+   
+   <Plugin Name="ExternalPotential">
+      
+      <!-- External force applied to cell. Each cell type has different force. -->
+      <!-- For more flexible specification of the constraint (done in Python) please use ExternalPotentialLocalFlex plugin -->
+      <!-- Algorithm options are: PixelBased, CenterOfMassBased -->
+      <Algorithm>PixelBased</Algorithm>
+      <ExternalPotentialParameters CellType="Periphery" x="10.5" y="0.0" z="0.0"/>
+      <ExternalPotentialParameters CellType="Core" x="10.5" y="0.0" z="0.0"/>
+   </Plugin>
+   
+   <Plugin Name="CenterOfMass">
+   </Plugin>
+   
+   <Plugin Name="Contact">
+      <!-- Specification of adhesion energies -->
+      <Energy Type1="Medium" Type2="Medium">10.0</Energy>
+      <Energy Type1="Medium" Type2="Periphery">10.0</Energy>
+      <Energy Type1="Medium" Type2="Core">10.0</Energy>
+      <Energy Type1="Medium" Type2="Chamber">0.0</Energy>
+      <Energy Type1="Periphery" Type2="Periphery">018.0</Energy>
+      <Energy Type1="Periphery" Type2="Core">018.0</Energy>
+      <Energy Type1="Periphery" Type2="Chamber">050.0</Energy>
+      <Energy Type1="Core" Type2="Core">018.0</Energy>
+      <Energy Type1="Core" Type2="Chamber">050.0</Energy>
+      <Energy Type1="Chamber" Type2="Chamber">0.0</Energy>
+      <NeighborOrder>4</NeighborOrder>
+   </Plugin>
+   
+</CompuCell3D>
